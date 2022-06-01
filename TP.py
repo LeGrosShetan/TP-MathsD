@@ -1,6 +1,7 @@
 import random
 import time
 
+
 def EuclideEtendu(a, b):
     if b == 0:
         return a, 1, 0
@@ -23,33 +24,32 @@ def ExpMod(a, k, n):
         k = k // 2
     return p
 
+
 def TestFernat(n):
     return ExpMod(2, n - 1, n) == 1
 
-def Square(n,i,j):
-    mid=(i+j)/2
-    mul=mid*mid
-    if mul==n or abs(mul-n)<0.00001:
-        return mid
-    elif mul<n:
-        return Square(n,mid,j)
-    else:
-        return Square(n,i,mid)
 
 def sqrt(n):
-    i=1
-    found = False
-    while not found:
-        if i*i >n:
-            found = True
-            return i
-        elif i*i>n:
-            res = Square(n,i-1,i)
-            found = True
-            return res
-        i=i+1
+    if n <= 1:
+        return 1
+    i = 1
+    while (i * i < n):
+        i += 1
+    return i
 
-#def TestPrimaliteNaif(n):
-    #transformer un entier en serie de bits, mettre à un les premiers, ce qui sera légèrement au dessus de la racine de ce dernier
+
+def TestPrimaliteNaif(n):
+    indice = sqrt(n)
+    step = 1
+    if (n % 2 == 1):
+        step = 2
+        if (indice % 2 == 0):
+            indice -= 1
+    while (indice > 0):  # Marche, car dans le pire des cas, renvoie 1
+        if (n % indice == 0):
+            return indice
+        indice -= step
+
 
 print(sqrt(100))
+# print(Square(100, 9, 10))
