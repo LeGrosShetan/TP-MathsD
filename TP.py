@@ -52,4 +52,3 @@ def TestPrimaliteNaif(n):
 
 
 print(sqrt(100))
-# print(Square(100, 9, 10))
