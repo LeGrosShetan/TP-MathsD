@@ -40,15 +40,31 @@ def sqrt(n):
 
 def TestPrimaliteNaif(n):
     indice = sqrt(n)
-    step = 1
-    if (n % 2 == 1):
-        step = 2
-        if (indice % 2 == 0):
-            indice -= 1
-    while (indice > 0):  # Marche, car dans le pire des cas, renvoie 1
-        if (n % indice == 0):
-            return indice
-        indice -= step
+    if(n%2 == 0):
+        return False
+    if(indice%2 == 0):
+        indice -= 1
+    while(indice > 0): #Marche, car dans le pire des cas, renvoie 1
+        if(n%indice == 0):
+            return (indice == 1)
+        indice -= 2
+
+def ratioPrime(i):
+    val1=ExpMod(2,i,2147483649)
+    val2=ExpMod(2,i+1,2147483649)
+    count1=1
+    count2=1
+    for j in range (3,val1,2):
+        if(TestPrimaliteNaif(j)):
+            count1 += 1
+    for k in range (3,val2,2):
+        if (TestPrimaliteNaif(k)):
+            count2 += 1
+
+    ratio=(count2-count1)/(val2-val1)
+    return ratio
 
 
-print(sqrt(100))
+
+print(ratioPrime(30))
+
