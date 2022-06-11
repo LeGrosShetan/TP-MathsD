@@ -39,32 +39,50 @@ def sqrt(n):
 
 
 def TestPrimaliteNaif(n):
-    indice = sqrt(n)
-    if(n%2 == 0):
+    d=2
+    r=n%d
+    racine = sqrt(n)
+    if n==2:
+        return True
+    if r==0:
         return False
-    if(indice%2 == 0):
-        indice -= 1
-    while(indice > 0): #Marche, car dans le pire des cas, renvoie 1
-        if(n%indice == 0):
-            return (indice == 1)
-        indice -= 2
+    d=3
+    while d<= racine:
+        r=n%d
+        if r==0:
+            return False
+        d+=2
+    return True
+
 
 def ratioPrime(i):
-    val1=ExpMod(2,i,2147483649)
-    val2=ExpMod(2,i+1,2147483649)
-    count1=1
-    count2=1
-    for j in range (3,val1,2):
-        if(TestPrimaliteNaif(j)):
-            count1 += 1
-    for k in range (3,val2,2):
-        if (TestPrimaliteNaif(k)):
-            count2 += 1
+    val1 = ExpMod(2, i, 2147483649)
+    val2 = ExpMod(2, i + 1, 2147483649)
+    count = 0
+    for j in range(val1, val2, 1):
+        if (TestPrimaliteNaif(j)):
+            count += 1
 
-    ratio=(count2-count1)/(val2-val1)
+    ratio = count / val1
     return ratio
 
+def ratioFernat(i):
+    val1 = ExpMod(2, i, 2147483649)
+    val2 = ExpMod(2, i + 1, 2147483649)
+    count = 0
+    for j in range(val1, val2, 1):
+        if (TestFernat(j)):
+            count += 1
+
+    ratio = count / val1
+    return ratio
+
+def tauxErreurFernat(i):
+    val1=ratioPrime(i)
+    val2=ratioFernat(i)
+    taux=(val2-val1)/val1
+    return taux
 
 
-print(ratioPrime(30))
+print(tauxErreurFernat(16))
 
