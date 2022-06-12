@@ -55,22 +55,26 @@ def TestPrimaliteNaif(n):
     return True
 
 
-def ratioPrime(i):
-    val1 = ExpMod(2, i, 2147483649)
-    val2 = ExpMod(2, i + 1, 2147483649)
-    count = 0
-    for j in range(val1, val2, 1):
-        if (TestPrimaliteNaif(j)):
-            count += 1
+def primesInRange(x,y):
+    prime_list = []
+    for n in range(x, y):
+        isPrime = TestPrimaliteNaif(n)
+        if isPrime:
+            prime_list.append(n)
+    return prime_list
 
-    ratio = count / val1
+def ratioPrime(i):
+    val1 = 2 ** i
+    val2 = 2 ** (i + 1)
+    liste=primesInRange(val1,val2)
+    ratio = len(liste) / val1
     return ratio
 
 def ratioFernat(i):
-    val1 = ExpMod(2, i, 2147483649)
-    val2 = ExpMod(2, i + 1, 2147483649)
+    val1 = 2**i
+    val2 = 2**(i + 1)
     count = 0
-    for j in range(val1, val2, 1):
+    for j in range(val1, val2):
         if (TestFernat(j)):
             count += 1
 
@@ -83,6 +87,25 @@ def tauxErreurFernat(i):
     taux=(val2-val1)/val1
     return taux
 
+#exo 6 a faire
 
-print(tauxErreurFernat(16))
+
+def GenPremiers(k):
+    i=2**k
+    liste = primesInRange(2,i)
+    return random.choice(liste)
+
+def PhiToFact(n,phin):
+    p=1
+    q=n+1-phin-p
+    while p*q != n:
+        p+=1
+        q = n + 1 - phin - p
+    return p,q
+#faire la deduction de l'exo8
+
+#faire exo 9, 10, 11, 12, 13, 14, 15
+
+
+print(GenPremiers(10))
 
