@@ -25,7 +25,7 @@ def ExpMod(a, k, n):
     return p
 
 
-def TestFernat(n):
+def TestFermat(n):
     return ExpMod(2, n - 1, n) == 1
 
 
@@ -38,7 +38,7 @@ def sqrt(n):
     return i
 
 
-def TestPrimaliteNaif(n):
+def PrimaliteNaif(n):
     d=2
     r=n%d
     racine = sqrt(n)
@@ -58,7 +58,15 @@ def TestPrimaliteNaif(n):
 def primesInRange(x,y):
     prime_list = []
     for n in range(x, y):
-        isPrime = TestPrimaliteNaif(n)
+        isPrime = PrimaliteNaif(n)
+        if isPrime:
+            prime_list.append(n)
+    return prime_list
+
+def FermatInRange(x,y):
+    prime_list = []
+    for n in range(x, y):
+        isPrime = TestFermat(n)
         if isPrime:
             prime_list.append(n)
     return prime_list
@@ -70,25 +78,22 @@ def ratioPrime(i):
     ratio = len(liste) / val1
     return ratio
 
-def ratioFernat(i):
+def ratioFermat(i):
     val1 = 2**i
     val2 = 2**(i + 1)
-    count = 0
-    for j in range(val1, val2):
-        if (TestFernat(j)):
-            count += 1
-
-    ratio = count / val1
+    liste = FermatInRange(val1, val2)
+    ratio = len(liste) / val1
     return ratio
 
-def tauxErreurFernat(i):
-    val1=ratioPrime(i)
-    val2=ratioFernat(i)
-    taux=(val2-val1)/val1
+def tauxErreurFermat(i):
+    val1 = 2 ** i
+    val2 = 2 ** (i + 1)
+    list1=primesInRange(val1,val2)
+    list2=FermatInRange(val1,val2)
+    len1=len(list1)
+    len2=len(list2)
+    taux=abs((len2-len1))/len1
     return taux
-
-#exo 6 a faire
-
 
 def GenPremiers(k):
     i=2**k
@@ -107,5 +112,6 @@ def PhiToFact(n,phin):
 #faire exo 9, 10, 11, 12, 13, 14, 15
 
 
-print(GenPremiers(10))
+print(tauxErreurFermat(20))
+
 
