@@ -109,7 +109,7 @@ def PhiToFact(n,phin):
     return p,q
 #faire la deduction de l'exo8
 
-#faire exo 9, 10, 11, 12, 13, 14, 15
+#faire exo 11, 12, 13, 14, 15
 
 
 print(tauxErreurFermat(20))
