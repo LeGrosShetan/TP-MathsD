@@ -1,3 +1,5 @@
+#made by Schwaederle Gaetan and Poiret Maxime
+
 import random
 import time
 
